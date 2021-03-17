@@ -27,9 +27,8 @@ int main(){
     sum += f;
     
     if(th>o){
-        sum += o;
         sum += th;
-        th -= o;
+        th = 0;
         o=0;
     }else if(th==o){
         sum += th;
@@ -40,17 +39,20 @@ int main(){
         o -= th;
         th = 0;
     }
-    
-    
+    // th , o 는 이제 없
+    // printf("%d\n",sum);
     sum = sum + t/2;
      
     t = t%2;
-
+    // printf("%d\n",sum);
     if(o==1){
         sum += 1;
     }else if(o == 2){
         sum += 1;
     }else if(o == 0){
+        if(t==1)
+        sum+=1;
+
         sum += 0;
     }else{
         if(t==1){
@@ -58,7 +60,9 @@ int main(){
         sum +=1;
         }
         
-        sum += o%4;
+        if(o%4 != 0 )
+        sum+=1;
+        
         sum += o/4;
     }
 
