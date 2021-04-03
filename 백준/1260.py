@@ -1,74 +1,46 @@
-
-
-def Node(key, adj,g):
-    a = list()
-    
-    key = int(key)
-    if key in g: # 그래프 넣기
-        a = g[key]
-        a.append(int(adj))
-        g[key] = a
-    else:
-        a.append(int(adj))
-        g[key] = a
-
-    if adj in g: # key로 들어오지 않은 key값 추가 
-        a
-    else:
-        g[int(adj)] = list()
-
-def DFS(g,snum, nodegasu):
-    check = list()
-    start = snum
-    count = 1
-    
-    while True:
-        
-        if len(check)==nodegasu:
-            break
-        if len(g[start])!=0:
-            if start in check:
-                start = g[start].pop()
+def DFS(DFSD,Snum,C,Ngasu):
+    # print(C)
+    if len(C) == Ngasu:
+        return
+    for x in DFSD[Snum]:
+        if x in C:
+            if Snum in C:
                 continue
-            print(start, ' ', end='')
-            check.append(start)
-            start = g[start].pop()
-            count=1
+            else:
+                C.append(Snum)
+                continue
         else:
-            if start in check:
-                start = check[len(check)-count]
-                count += 1
-                continue
-            print(start,' ', end='')
-            check.append(start)
-            start=check[len(check)-count]
-            count+=1
-        
-    
-                
-    
-
-            
+            if Snum in C:
+                Snum = x
+                DFS(DFSD,Snum,C,Ngasu)
+            else:
+                C.append(Snum)
+                Snum = x
+                DFS(DFSD,Snum,C,Ngasu)
 
 
 
-g = {}
-chec = list()
-nodegasu, linegasu, startnum = input().split()
-nodegasu, linegasu, startnum = int(nodegasu), int(linegasu), int(startnum)
+def BFS(BFSD,Snum,C,Ngasu):
+    # print(C, Snum)
+    count = 0
+    C.append(Snum)
+    while True:
+        # print(C)
+        if len(C) == Ngasu:
+            break
+        if count == Ngasu:
+            break
+        for x in BFSD[Snum]:
+            if x in C:
+                A
+            else:
+                C.append(x)
 
-for x in range(linegasu): # 그래프 넣기
-    node,adj = input().split()
-    Node(node,adj,g)
-
-#숫자들 정렬
-for x in g:
-    g[x].sort()
-    g[x].reverse()
-
-#dfs
-DFS(g,startnum,nodegasu)
-# print(g[1].pop())
+        count += 1
+        if len(C)<count+1:
+            A
+        else:
+            Snum = C[count]
 
 
 
@@ -79,4 +51,41 @@ DFS(g,startnum,nodegasu)
 
 
 
+Ngasu, Lgasu, Snum = input().split()
+Ngasu, Lgasu, Snum = int(Ngasu), int(Lgasu), int(Snum)
 
+
+Dic = {}
+
+
+for x in range(1,Ngasu+1):
+    L = list()
+    Dic[x] = L
+
+for x in range(Lgasu):
+    A,B = input().split()
+    A,B = int(A), int(B)
+    Dic[A].append(B)
+    Dic[B].append(A)
+
+for x in Dic:
+    Dic[x].sort()
+
+# ---- 여기까지 리스트로 만들기 ------
+if len(Dic[Snum]) == 0:
+    print(Snum)
+    print(Snum)
+    exit()
+# print(Dic)
+DFSL = list()
+DFS(Dic,Snum,DFSL,Ngasu)
+# print(DFSL)
+for x in DFSL:
+    print(x,end=' ')
+print()
+DFSL = list()
+BFS(Dic,Snum,DFSL,Ngasu)
+for x in DFSL:
+    print(x,end=' ')
+
+# print(BFSL)
